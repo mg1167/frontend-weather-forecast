@@ -1,0 +1,58 @@
+.titulo
+{
+	color:black;
+	background-color: silver;
+	height: 40px;
+	width: 200px;
+	text-align: center;
+
+	
+}
+.pais
+{
+	color:white;
+	text-align: center;
+	color:black;
+}
+.departamento
+{
+	color:white;
+	text-align: center;
+	color:black;
+}
+.temp
+{
+	color:black;
+	margin-left: 100px;
+}
+.boton
+{
+	color:white;
+}
+.ingreso_pais
+{
+	margin-left: 100px;
+	text-align: center;
+}
+.ingreso_departamento
+{
+	margin-left: 100px;
+	text-align: center;
+}
+.recuadro
+{
+	width: 400px;
+	height: 300px;
+
+	background-color:silver;
+
+}
+.temperatura
+{
+	margin-left: 500px;
+}
+.boton
+{
+	margin-left: 100px;
+	color: black;
+}
