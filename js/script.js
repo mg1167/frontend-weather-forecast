@@ -1,13 +1,4 @@
-$.fn.exBounce = function(){
-    var self = this;
-    (function runEffect(){
-        self.effect("bounce", { times:3 }, 1200, runEffect);
-    })();
-   return this;
-};
-
 $(document).ready(function(){
-	//$(".tituloInput").exBounce();
 	$(".boton").click(function(){
 		var tempType = ($('input[name="temp"]:checked').val());
 		var pais = $("input[name=pais]").val();
@@ -18,22 +9,22 @@ $(document).ready(function(){
 				$.ajax({ 
 					url : "paises.json", dataType : "json",
 					success : function(parsed_json) {
-						for (var i = 0; i <= 242; i++) { //recorrer el json de paises para encontrar su codigo
+						for (var i = 0; i <= 242; i++) { //recorrido del JSON
 							if (((parsed_json[i]["name"]).toLowerCase()) == pais.toLowerCase()){
 								codPais = parsed_json[i]["code"];
 							};
 						};
-						//Codigo para el departamento
+						//Codigo departamento
 
 						if (codPais.length==0) { //error si no encontro el codigo para el pais ingresado
-							alert("Ops! Looks like your country doesn't exist! Try again.");
+							alert("País no existente, por favor intente nuevamente.");
 						}else{
 							var direccion = "http://api.wunderground.com/api/982477ef024a148c/conditions/q/"+codPais+"/"+depto+".json";
 							$(document).ready(function(){
 								jQuery(document).ready(function($) { 
 									$.ajax({ url : direccion, dataType : "jsonp",
 										success : function(parsed_json2) {
-											if(parsed_json2["current_observation"]){ //revisar si el departamento tiene esta llave
+											if(parsed_json2["current_observation"]){ //Verificar llave existente
 												var location = parsed_json2['current_observation']['display_location']['full']; 
 												var lastUpdate = parsed_json2['current_observation']['observation_time']; 
 												var actualTemp;
@@ -47,9 +38,9 @@ $(document).ready(function(){
 												var weather = parsed_json2['current_observation']['weather']; 
 												var weatherImg = parsed_json2['current_observation']['icon_url']; 
 												$(".resultParagraph").empty();
-												$(".resultParagraph").append("Current temperature in " + location + " is: " + actualTemp +"<br/>Weather: "+ weather + "<br/><img src=\""+weatherImg+"\"><br/>" + lastUpdate);
-											}else{//error si no tiene esa llave
-												alert("Ops! The city you entered doesn't exist or we don't have any data of this city!");
+												$(".resultParagraph").append("<div class=\"hola\"><p>La temperatura en: " + location + " is: " + actualTemp +"</p><p>Weather: "+ weather + "</p><p><img src=\""+weatherImg+"\"></p>" + "<p>"+ lastUpdate+"</p></div>");
+											}else{//si no la posee:
+												alert("Ciudad no existente o base de datos inexistente.");
 											}
 										}
 									});
@@ -61,11 +52,11 @@ $(document).ready(function(){
 			});
 			$("input[type=\"text\"]").val("");
 		}else if (depto.length==0 && pais.length==0){
-			alert("You must input something in both boxes!");
+			alert("¡Escribe un respectivo País y su Ciudad!");
 		}else if(depto.length==0){
-			alert("You forgot to input something in city box!");
+			alert("Por favor, ingese ciudad.");
 		}else if(pais.length==0){
-			alert("You forgot to input something in country box!");
+			alert("Por favor ingrese país.");
 		}
 		
 	});
